@@ -15,3 +15,22 @@ class ApiConfigs:
     api_docs_url: str = f"{api_base_url}/docs"
     api_redoc_url: str = f"{api_base_url}/redoc"
     api_openapi_url: str = f"{api_base_url}/openapi.json"
+
+
+@dataclasses.dataclass(frozen=True)
+class DatabaseConfigs:
+    """Config class to store all the database configurations"""
+
+    # Database configurations
+    db_url: str = "sqlite:///./example.db"
+    db_echo: bool = False
+
+
+@dataclasses.dataclass(frozen=True)
+class MongoDBConfigs:
+    """Config class to store all the MongoDB configurations"""
+
+    # MongoDB configurations
+    db_url: str = "mongodb://localhost:27017"
+    db_name: str = "example"
+    db_echo: bool = False
