@@ -1,15 +1,23 @@
-from pydantic import BaseModel, EmailStr
-from typing import Optional
+from dataclasses import dataclass
 from datetime import date, datetime
 from enum import Enum
+from typing import Optional
+import uuid
 
-class User(BaseModel):
+@dataclass
+class User():
+    class UserRoles(Enum):
+        ADMIN = 'admin'
+        USER = 'user'
+        GUEST = 'guest'
+        DEFAULT = "default"
+
     id: str
     hashed_password: str
     username: str
     firstname: str
     lastname: str
-    role: Optional[str]
+    role: UserRoles
     phone: Optional[str]
     email: Optional[str]
     active: Optional[bool]
@@ -38,21 +46,3 @@ class User(BaseModel):
             last_login_date=data.get('last_login_date'),
     )
 
-
-class UserCreate(BaseModel):
-    username: str
-    firstname: str
-    lastname: str
-    password: str
-    email: Optional[EmailStr]
-    phone: Optional[str]
-
-    def to_dict(self):
-        return {
-            "firstname": self.firstname,
-            "lastname": self.lastname,
-            "email": self.email,
-            "password": self.password,
-            "phone": self.phone,
-            "email": self.email,
-        }

@@ -31,8 +31,8 @@ class MongoDBConfigs:
     """Config class to store all the MongoDB configurations"""
 
     # MongoDB configurations
-    db_url: str = "mongodb://localhost:27017"
-    db_name: str = "example"
+    db_url: str = "mongodb+srv://emre:Qy0kYbyI757xvT9A@first.wdqfnt7.mongodb.net/?retryWrites=true&w=majority"
+    db_name: str = "first"
     db_echo: bool = False
 
 @dataclasses.dataclass(frozen=True)

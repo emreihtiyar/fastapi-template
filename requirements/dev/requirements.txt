@@ -59,3 +59,4 @@ websockets==10.4
 wsproto==1.2.0
 python-jose==3.3.0
 passlib==1.7.4
+motor==3.1.1
