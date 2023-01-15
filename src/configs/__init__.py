@@ -40,13 +40,20 @@ class JWTConfigs:
     SECRET_KEY: str = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES:str = 30
-    REFRESH_TOKEN_EXPIRE_MINUTES:str = 
+    REFRESH_TOKEN_EXPIRE_MINUTES:str = 60 * 24 * 7 # 7 days
 
 @dataclasses.dataclass(frozen=True)
 class HashingConfigs:
     """Config class to store all the hashing configurations"""
+    """
+    There are currently four good choices [1] for secure hashing:
 
+    argon2
+    bcrypt
+    pbkdf2_sha256 / pbkdf2_sha512
+    sha256_crypt / sha512_crypt
+    """
     # Hashing configurations
-    algorithm: str = "bcrypt" # bcrypt, argon2, scrypt
-    salt: str = "emre" # salt
-    rounds: int = 12 # rounds
+    SCHEMES: tuple = ("argon2", "bcrypt", "pbkdf2_sha512", "sha512_crypt")
+    SALT: str = "graderthan22characters"
+    DEPRECATED: tuple = ("auto", "auto", "auto", "auto")
