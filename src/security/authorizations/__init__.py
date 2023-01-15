@@ -2,8 +2,8 @@ import datetime
 from jose import jwt as jose_jwt
 from jose import jws as jose_jws
 from jose.exceptions import JWTError as JoseJWTError, JWSError as JoseJWSError
-from utils.exceptions import InvalidJWTException, InvalidJWTSignatureException
-from configs import JWTConfigs as JWTConfigs
+from src.utils.exceptions import InvalidJWTException, InvalidJWTSignatureException
+from src.configs import JWTConfigs as JWTConfigs
 
 class JWTGenerator:
     """Generates a JWT token for a given user."""

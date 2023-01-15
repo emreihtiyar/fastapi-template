@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
-from models.schemas import auth
-from security.authorizations import JWTGenerator as JwTGenerator
+from src.models.schemas import auth
+from src.security.authorizations import JWTGenerator as JwTGenerator
 
 
 router = APIRouter(

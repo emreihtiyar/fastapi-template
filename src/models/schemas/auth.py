@@ -1,7 +1,7 @@
 import pydantic
 from typing import Optional
 from types import NoneType
-from configs import JWTConfigs as JWTConfigs
+from src.configs import JWTConfigs as JWTConfigs
 
 class OAuthBase(pydantic.BaseModel):
     pass
