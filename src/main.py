@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from configs import ApiConfigs
+from api.v1.routes import router as v1_router
+
 
 app = FastAPI(
     title=ApiConfigs.title,
@@ -10,10 +12,4 @@ app = FastAPI(
     openapi_url=ApiConfigs.api_openapi_url,
 )
 
-@app.get(ApiConfigs.api_base_url+"/")
-def get_root():
-    return "API is up and running"
-
-@app.post(ApiConfigs.api_base_url+"/")
-def post_root():
-    return "API is up and running"
+app.include_router(v1_router, prefix="/api")
