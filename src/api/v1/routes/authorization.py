@@ -1,16 +1,18 @@
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from models.schemas import Auth
+
+from models.schemas import auth
+from security.authorizations import JWTGenerator as JwTGenerator
 
 
 router = APIRouter(
-    prefix="/authorization",
+    prefix="/auth",
     tags=["authorization"],
 )
 
 
-oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl=router.prefix + "/token",
+oauth2_scheme = OAuth2PasswordBearer( 
+    tokenUrl="/api/v1/auth/token",
 )
 
 @router.get("/")
@@ -19,10 +21,19 @@ def get_root():
 
 @router.post("/token")
 async def token(form_data: OAuth2PasswordRequestForm = Depends()):
-    return Auth.OAuthTokenResponse(
-        access_token="fake-token",
+    gen = JwTGenerator(form_data.username)
+    return auth.OAuthTokenResponse(
+        access_token=gen.generate(),
+        token_type="bearer",
+        refresh_token=None,
+        scope=None
     )
 
-@router.get("/test")
-async def test(token: str = Depends(oauth2_scheme)):
+@router.get("/get_token")
+async def get_token(token: str = Depends(oauth2_scheme)):
     return {"token": token}
+
+
+@router.post("/verify_token")
+async def verify_token(token: str = Depends(oauth2_scheme), user_id: str = "emre"):
+    return {"result":JwTGenerator(user_id).verify(token)}

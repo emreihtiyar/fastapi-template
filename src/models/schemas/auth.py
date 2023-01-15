@@ -1,7 +1,7 @@
 import pydantic
 from typing import Optional
 from types import NoneType
-
+from configs import JWTConfigs as JWTConfigs
 
 class OAuthBase(pydantic.BaseModel):
     pass
@@ -17,7 +17,7 @@ class OAuthTokenRequest(OAuthBase):
 class OAuthTokenResponse(OAuthBase):
     access_token: str
     token_type: str = "bearer"
-    expires_in: int = 3600  # 1 hour
+    expires_in: int = JWTConfigs.ACCESS_TOKEN_EXPIRE_MINUTES * 60 # seconds
     refresh_token: str = None
     scope: str = None
 
