@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends
-from src.models.db import User as UserDB
-from src.models.schemas.user import UserCreate
-from src.db import db
+from src.models.db.users import (
+    User as UserDB,
+)
+from src.models.schemas.user import UserCreate, User
 
 
 router = APIRouter(
@@ -13,5 +14,6 @@ users = []
 
 @router.post("/")
 async def post_users(user: UserCreate):
-    result = await db.users.insert_one(user.to_dict())
-    return print(result)
+    user = UserDB.from_schemas(user)
+    user.save()
+    return User.from_models(user)
