@@ -1,26 +1,19 @@
 import uuid
-import mongoengine
+
 from mongoengine.document import Document
 from mongoengine.fields import (
-    StringField,
+    BooleanField, 
+    DateTimeField, 
     EmailField,
-    BooleanField,
-    DateTimeField,
-)
-from src.models.schemas.user import (
-    User as UserSchema,
-    UserCreate as UserCreateSchema,
+    StringField
 )
 
-from src.configs import MongoDBConfigs
-
-mongoengine.connection.connect(
-    host=MongoDBConfigs.db_url,
-    db=MongoDBConfigs.db_name,
-)
+from src.models.schemas.user import User as UserSchema
+from src.models.schemas.user import UserCreate as UserCreateSchema
 
 
 class User(Document):
+    """ User model """
     id = StringField(required=True, primary_key=True, unique=True)
     username = StringField(required=True, unique=True)
     firstname = StringField(required=True)

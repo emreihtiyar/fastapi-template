@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from src.configs import ApiConfigs
-from src.api.v1.routes import router as v1_router
 
+from src.api.v1.routes import router as v1_router
+from src.configs import ApiConfigs
 
 app = FastAPI(
     title=ApiConfigs.title,
