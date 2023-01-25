@@ -40,29 +40,3 @@ class BaseModel(abc.ABC):
     def from_schema(cls, data: BaseSchema) -> 'BaseModel':
         """ Convert schema to model """
         return cls(**data.to_dict())
-    @classmethod
-    @abc.abstractmethod
-    async def create(cls, data: Dict|BaseSchema) -> 'BaseModel':
-        """ Create model from dict """
-        raise NotImplementedError
-    @classmethod
-    @abc.abstractmethod
-    async def get(cls, _id: str) -> 'BaseModel':
-        """ Get model by id """
-        raise NotImplementedError
-    @classmethod
-    @abc.abstractmethod
-    async def update(cls, _id: str, data: Dict|BaseSchema) -> 'BaseModel':
-        """ Update model by id """
-        raise NotImplementedError
-    @classmethod
-    @abc.abstractmethod
-    async def delete(cls, _id: str) -> 'BaseModel':
-        """ Delete model by id """
-        raise NotImplementedError
-    @classmethod
-    @abc.abstractmethod
-    async def get_all(cls) -> List['BaseModel']:
-        """ Get all models """
-        raise NotImplementedError
-        

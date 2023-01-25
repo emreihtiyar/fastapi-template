@@ -1,10 +1,9 @@
 """User model."""
+import json
 from dataclasses import dataclass
 from typing import Dict, List
 from src.models.db import BaseModel
 from src.models.schemas.user import User as UserSchema
-from src.repository.db import DBHelper
-
 
 @dataclass
 class User(BaseModel):
@@ -21,7 +20,7 @@ class User(BaseModel):
     role: str | None = None
     active: bool = True
 
-    def to_dict(self) -> Dict:
+    def __to_dict(self) -> Dict:
         """Convert user to dict."""
         return {
             'id': self.id,
@@ -34,6 +33,15 @@ class User(BaseModel):
             'role': self.role,
             'active': self.active,
         }
+    def to_dict(self, without_keys:List|None=None, filter_none=False) -> Dict:
+        """Convert user to dict."""
+        if without_keys is None:
+            without_keys = []
+        return {key: value for key, value in self.__to_dict().items() \
+                    if key not in without_keys and (value is not None or not filter_none)}
+    def to_json(self, without_keys:List|None=None, filter_none=False) -> str:
+        """Convert user to json."""
+        return json.dumps(self.to_dict(without_keys, filter_none))
     def to_schema(self) -> UserSchema:
         """Convert user to schema."""
         return UserSchema(
@@ -73,12 +81,6 @@ class User(BaseModel):
             role=data.role,
             active=data.active,
         )
-    async def create(self) -> 'User':
-        """Create user."""
-        self.__db = DBHelper('users')
-        user_id = await self.__db.create(self.to_dict())
-        self.id = user_id
-        return self
     @classmethod
     async def get(cls, _id: str) -> 'User':
         """Get user by id."""
@@ -95,3 +97,4 @@ class User(BaseModel):
     async def get_all(cls) -> List['User']:
         """Get all users."""
         pass
+        
