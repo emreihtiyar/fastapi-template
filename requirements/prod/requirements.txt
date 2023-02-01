@@ -46,5 +46,5 @@ typing_extensions==4.4.0
 uvicorn==0.20.0
 uvloop==0.17.0
 watchfiles==0.18.1
-wcwidth==0.2.5
+wcwidth==0.2.6
 websockets==10.4
