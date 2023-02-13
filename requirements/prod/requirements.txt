@@ -14,7 +14,7 @@ httptools==0.5.0
 idna==3.4
 iniconfig==2.0.0
 ipdb==0.13.11
-ipython==8.8.0
+ipython==8.10.0
 jedi==0.18.2
 matplotlib-inline==0.1.6
 mypy==0.991
