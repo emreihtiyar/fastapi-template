@@ -31,7 +31,7 @@ class MongoDBConfigs:
     """Config class to store all the MongoDB configurations"""
 
     # MongoDB configurations
-    db_url: str = "mongodb+srv://emre:Qy0kYbyI757xvT9A@first.wdqfnt7.mongodb.net/?retryWrites=true&w=majority"
+    db_url: str = ""
     db_name: str = "first"
     db_echo: bool = False
 
